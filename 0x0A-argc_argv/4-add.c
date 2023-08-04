@@ -1,61 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+
 
 /**
- * check_num - Check if a string consists of digits.
- * @str: The input string to check.
- *
- * Return: 1 if the string consists of digits, 0 otherwise.
- */
-int check_num(char *str)
+* main - adds positive numbers.
+* @argc: argument count
+* @argv: arguments
+*
+* Return: 0
+*/
+int main(int argc, char **argv)
 {
-    unsigned int count = 0;
+int i, n, sum = 0;
+char *flag;
 
-    while (count < strlen(str))
-    {
-        if (!isdigit(str[count]))
-        {
-            return 0;
-        }
-        count++;
-    }
 
-    return 1;
+if (argc < 2)
+{
+printf("0\n");
+return (0);
 }
 
-/**
- * main - Entry point of the program.
- * @argc: The number of command-line arguments.
- * @argv: An array of strings containing the command-line arguments.
- *
- * Return: 0 on success, 1 on error.
- */
-int main(int argc, char *argv[])
+
+for (i = 1; argv[i]; i++)
 {
-    int count;
-    int str_to_int;
-    int sum = 0;
-
-    count = 1;
-    while (count < argc)
-    {
-        if (check_num(argv[count]))
-        {
-            str_to_int = atoi(argv[count]);
-            sum += str_to_int;
-        }
-        else
-        {
-            printf("Error\n");
-            return 1;
-        }
-        count++;
-    }
-
-    printf("%d\n", sum);
-
-    return 0;
+n = strtol(argv[i], &flag, 10);
+if (*flag)
+{
+printf("Error\n");
+return (1);
 }
+else
+{
+sum += n;
+}
+}
+printf("%d\n", sum);
 
+
+return (0);
+}
